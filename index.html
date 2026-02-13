@@ -10,9 +10,9 @@ body{
     margin:0;
     font-family: Arial, sans-serif;
     text-align:center;
-    background: linear-gradient(to right, #89CFF0, #1E90FF);
-    color:white;
-    overflow:hidden;
+    background: linear-gradient(to right, #ffd6e8, #ffb3d9);
+    color:#d63384;
+    overflow-x:hidden;
 }
 
 section{
@@ -22,17 +22,19 @@ section{
 button{
     padding:12px 25px;
     border:none;
-    background:white;
-    color:#1E90FF;
+    background:#ff69b4;
+    color:white;
     border-radius:25px;
     cursor:pointer;
     font-size:16px;
     margin:10px;
 }
 
-.hidden{
-    display:none;
+button:hover{
+    background:#ff1493;
 }
+
+.hidden{ display:none; }
 
 h1{
     animation: fadeIn 2s forwards;
@@ -43,11 +45,11 @@ h1{
     to{opacity:1;}
 }
 
-/* Floating hearts */
+/* Hearts */
 .heart{
     position:fixed;
     bottom:-10px;
-    animation: floatUp 4s linear infinite;
+    animation: floatUp 3s linear forwards;
 }
 
 @keyframes floatUp{
@@ -55,8 +57,8 @@ h1{
     100%{transform:translateY(-100vh); opacity:0;}
 }
 
-/* Bike loader */
-.loader{
+/* Bike animation */
+.bike{
     font-size:50px;
     animation: moveBike 3s linear forwards;
 }
@@ -65,79 +67,100 @@ h1{
     from{transform:translateX(-100vw);}
     to{transform:translateX(100vw);}
 }
+
+/* Popup effect */
+.popup{
+    animation: pop 1s ease forwards;
+}
+
+@keyframes pop{
+    0%{transform:scale(0);}
+    100%{transform:scale(1);}
+}
+
+video{
+    width:300px;
+    border-radius:20px;
+    margin-top:20px;
+}
 </style>
 </head>
 
 <body>
 
-<audio id="bgm" autoplay loop>
-  <source src="melody.mp3" type="audio/mpeg">
-</audio>
-
+<!-- Page 1 -->
 <section id="page1">
 <h1>Hey My Dear Best Frnd 🩵</h1>
-<button onclick="nextPage()">Next</button>
+<button onclick="goNext()">Next</button>
 </section>
 
-<section id="loaderPage" class="hidden">
-<div class="loader">🏍️</div>
+<!-- Bike Loader -->
+<section id="loader" class="hidden">
+<div class="bike">🏍️</div>
 </section>
 
+<!-- Page 2 -->
 <section id="page2" class="hidden">
-<h1>🎉 Happy Birthday Owner Hy 🎉</h1>
+<h1 class="popup"> Happy Birthday Owner Hy 🎉</h1>
 </section>
 
+<!-- Video Page -->
 <section id="videoPage" class="hidden">
 <h2>Our Memories 🩵</h2>
-<video width="300" controls>
+<video controls>
   <source src="memory.mp4" type="video/mp4">
 </video>
 </section>
 
+<!-- Final Surprise -->
 <section id="finalPage" class="hidden">
-<button onclick="playDude()">Click for Surprise</button>
+<button onclick="playSurprise()">Click for Surprise 💖</button>
 <h2 id="finalText" class="hidden">
-Even If I get to Start over thousand times,  
-I will always choose you as my best Friend Eruma 🩵..!!  
-<br><br>
+Even If I get to Start over thousand times,<br>
+I will always choose you as my best Friend Eruma ..!! 🩵<br><br>
 Once again Happy Birthday Paagal 🩵
 </h2>
 </section>
 
+<audio id="dudeBgm">
+  <source src="dude.mp3" type="audio/mpeg">
+</audio>
+
 <script>
 function hearts(){
-    for(let i=0;i<5;i++){
+    for(let i=0;i<6;i++){
         let heart=document.createElement("div");
         heart.className="heart";
-        heart.innerHTML="🩵";
+        heart.innerHTML="💗";
         heart.style.left=Math.random()*100+"vw";
         heart.style.fontSize=(Math.random()*20+15)+"px";
         document.body.appendChild(heart);
-        setTimeout(()=>heart.remove(),4000);
+        setTimeout(()=>heart.remove(),3000);
     }
 }
 
-function nextPage(){
+function goNext(){
     hearts();
     document.getElementById("page1").classList.add("hidden");
-    document.getElementById("loaderPage").classList.remove("hidden");
+    document.getElementById("loader").classList.remove("hidden");
     setTimeout(()=>{
-        document.getElementById("loaderPage").classList.add("hidden");
+        document.getElementById("loader").classList.add("hidden");
         document.getElementById("page2").classList.remove("hidden");
     },3000);
+
+    setTimeout(()=>{
+        document.getElementById("videoPage").classList.remove("hidden");
+    },5000);
+
+    setTimeout(()=>{
+        document.getElementById("finalPage").classList.remove("hidden");
+    },7000);
 }
 
-setTimeout(()=>{
-    document.getElementById("videoPage").classList.remove("hidden");
-},6000);
-
-setTimeout(()=>{
-    document.getElementById("finalPage").classList.remove("hidden");
-},9000);
-
-function playDude(){
+function playSurprise(){
     hearts();
     document.getElementById("finalText").classList.remove("hidden");
+    document.getElementById("dudeBgm").play();
 }
 </script>
 
