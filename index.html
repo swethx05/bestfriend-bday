@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy Birthday My Bestie 💖</title>
+
+<style>
+body{
+    margin:0;
+    font-family: Arial, sans-serif;
+    text-align:center;
+    background: linear-gradient(to right, #ff9a9e, #fad0c4);
+}
+
+section{
+    padding:50px 20px;
+}
+
+h1{
+    font-size:35px;
+}
+
+button{
+    padding:12px 25px;
+    border:none;
+    background:#ff4d6d;
+    color:white;
+    border-radius:25px;
+    cursor:pointer;
+    font-size:16px;
+}
+
+button:hover{
+    background:#e63950;
+}
+
+.gallery{
+    display:none;
+    margin-top:20px;
+}
+
+.gallery img{
+    width:200px;
+    height:200px;
+    object-fit:cover;
+    border-radius:15px;
+    margin:10px;
+}
+
+#proposal{
+    display:none;
+    margin-top:20px;
+    font-size:20px;
+    font-weight:bold;
+}
+
+@media(max-width:600px){
+    h1{
+        font-size:25px;
+    }
+    .gallery img{
+        width:140px;
+        height:140px;
+    }
+}
+</style>
+</head>
+
+<body>
+
+<section>
+    <h1>🎉 Happy Birthday My Dear Best Friend 💖</h1>
+    <p>You make my life so special 🥹</p>
+    <button onclick="showGallery()">Click for Surprise 🎁</button>
+
+    <div class="gallery" id="gallery">
+        <img src="photo1.jpg">
+        <img src="photo2.jpg">
+        <img src="photo3.jpg">
+    </div>
+
+    <div id="proposal">
+        💌 No matter what happens...  
+        Will you be my Best Friend forever? 💛
+    </div>
+
+    <br><br>
+    <button onclick="showProposal()">Click for Final Message 💌</button>
+</section>
+
+<script>
+function showGallery(){
+    document.getElementById("gallery").style.display="block";
+}
+
+function showProposal(){
+    document.getElementById("proposal").style.display="block";
+}
+</script>
+
+</body>
+</html>
