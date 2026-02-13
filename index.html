@@ -3,99 +3,141 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Happy Birthday My Bestie 💖</title>
+<title>Happy Birthday 🩵</title>
 
 <style>
 body{
     margin:0;
     font-family: Arial, sans-serif;
     text-align:center;
-    background: linear-gradient(to right, #ff9a9e, #fad0c4);
+    background: linear-gradient(to right, #89CFF0, #1E90FF);
+    color:white;
+    overflow:hidden;
 }
 
 section{
-    padding:50px 20px;
-}
-
-h1{
-    font-size:35px;
+    padding:60px 20px;
 }
 
 button{
     padding:12px 25px;
     border:none;
-    background:#ff4d6d;
-    color:white;
+    background:white;
+    color:#1E90FF;
     border-radius:25px;
     cursor:pointer;
     font-size:16px;
-}
-
-button:hover{
-    background:#e63950;
-}
-
-.gallery{
-    display:none;
-    margin-top:20px;
-}
-
-.gallery img{
-    width:200px;
-    height:200px;
-    object-fit:cover;
-    border-radius:15px;
     margin:10px;
 }
 
-#proposal{
+.hidden{
     display:none;
-    margin-top:20px;
-    font-size:20px;
-    font-weight:bold;
 }
 
-@media(max-width:600px){
-    h1{
-        font-size:25px;
-    }
-    .gallery img{
-        width:140px;
-        height:140px;
-    }
+h1{
+    animation: fadeIn 2s forwards;
+}
+
+@keyframes fadeIn{
+    from{opacity:0;}
+    to{opacity:1;}
+}
+
+/* Floating hearts */
+.heart{
+    position:fixed;
+    bottom:-10px;
+    animation: floatUp 4s linear infinite;
+}
+
+@keyframes floatUp{
+    0%{transform:translateY(0); opacity:1;}
+    100%{transform:translateY(-100vh); opacity:0;}
+}
+
+/* Bike loader */
+.loader{
+    font-size:50px;
+    animation: moveBike 3s linear forwards;
+}
+
+@keyframes moveBike{
+    from{transform:translateX(-100vw);}
+    to{transform:translateX(100vw);}
 }
 </style>
 </head>
 
 <body>
 
-<section>
-    <h1>🎉 Happy Birthday My Dear Best Friend 💖</h1>
-    <p>You make my life so special 🥹</p>
-    <button onclick="showGallery()">Click for Surprise 🎁</button>
+<audio id="bgm" autoplay loop>
+  <source src="melody.mp3" type="audio/mpeg">
+</audio>
 
-    <div class="gallery" id="gallery">
-        <img src="photo1.jpg">
-        <img src="photo2.jpg">
-        <img src="photo3.jpg">
-    </div>
+<section id="page1">
+<h1>Hey My Dear Best Frnd 🩵</h1>
+<button onclick="nextPage()">Next</button>
+</section>
 
-    <div id="proposal">
-        💌 No matter what happens...  
-        Will you be my Best Friend forever? 💛
-    </div>
+<section id="loaderPage" class="hidden">
+<div class="loader">🏍️</div>
+</section>
 
-    <br><br>
-    <button onclick="showProposal()">Click for Final Message 💌</button>
+<section id="page2" class="hidden">
+<h1>🎉 Happy Birthday Owner Hy 🎉</h1>
+</section>
+
+<section id="videoPage" class="hidden">
+<h2>Our Memories 🩵</h2>
+<video width="300" controls>
+  <source src="memory.mp4" type="video/mp4">
+</video>
+</section>
+
+<section id="finalPage" class="hidden">
+<button onclick="playDude()">Click for Surprise</button>
+<h2 id="finalText" class="hidden">
+Even If I get to Start over thousand times,  
+I will always choose you as my best Friend Eruma 🩵..!!  
+<br><br>
+Once again Happy Birthday Paagal 🩵
+</h2>
 </section>
 
 <script>
-function showGallery(){
-    document.getElementById("gallery").style.display="block";
+function hearts(){
+    for(let i=0;i<5;i++){
+        let heart=document.createElement("div");
+        heart.className="heart";
+        heart.innerHTML="🩵";
+        heart.style.left=Math.random()*100+"vw";
+        heart.style.fontSize=(Math.random()*20+15)+"px";
+        document.body.appendChild(heart);
+        setTimeout(()=>heart.remove(),4000);
+    }
 }
 
-function showProposal(){
-    document.getElementById("proposal").style.display="block";
+function nextPage(){
+    hearts();
+    document.getElementById("page1").classList.add("hidden");
+    document.getElementById("loaderPage").classList.remove("hidden");
+    setTimeout(()=>{
+        document.getElementById("loaderPage").classList.add("hidden");
+        document.getElementById("page2").classList.remove("hidden");
+    },3000);
+}
+
+setTimeout(()=>{
+    document.getElementById("videoPage").classList.remove("hidden");
+},6000);
+
+setTimeout(()=>{
+    document.getElementById("finalPage").classList.remove("hidden");
+},9000);
+
+function playDude(){
+    hearts();
+    document.getElementById("finalText").classList.remove("hidden");
 }
 </script>
 
